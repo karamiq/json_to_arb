@@ -1,3 +1,6 @@
+## [0.1.12] - 2025-09-06
+Version bump to 0.1.12 for maintenance and compatibility updates.
+
 ## [0.1.11] - 2025-09-06
 Version bump to 0.1.11 for maintenance and compatibility updates.
 ## [0.1.0] - 2025-09-05
