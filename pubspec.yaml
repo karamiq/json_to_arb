@@ -1,8 +1,7 @@
 name: json_to_arb
 description: A Dart package to convert JSON localization files to ARB format.
-version: 0.1.1
+version: 0.1.11
 repository(GitHub): https://github.com/karamiq/json_to_arb
-authors:
   - Karam Rasheed fs58fryfbyqc@gmail.com
 
 environment:

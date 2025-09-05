@@ -9,5 +9,9 @@ class LangaugeModel {
 
   final Map<File, Map<String, dynamic>> filesContents;
 
-  LangaugeModel({required this.code, required this.jsonFiles, required this.filesContents});
+  LangaugeModel({
+    required this.code,
+    required this.jsonFiles,
+    required this.filesContents,
+  });
 }

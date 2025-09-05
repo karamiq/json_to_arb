@@ -7,12 +7,17 @@ bool checkFiles(List<LangaugeModel> languages) {
   if (languages.isEmpty) return false;
   // Collect all unique filenames across all languages
   final Set<String> allFileNames = {
-    for (var lang in languages) ...lang.jsonFiles.map((f) => f.uri.pathSegments.last),
+    for (var lang in languages)
+      ...lang.jsonFiles.map((f) => f.uri.pathSegments.last),
   };
   final Map<String, List<String>> missingFiles = {};
   for (var lang in languages) {
-    final Set<String> langFileNames = lang.jsonFiles.map((f) => f.uri.pathSegments.last).toSet();
-    final List<String> missing = allFileNames.where((fileName) => !langFileNames.contains(fileName)).toList();
+    final Set<String> langFileNames = lang.jsonFiles
+        .map((f) => f.uri.pathSegments.last)
+        .toSet();
+    final List<String> missing = allFileNames
+        .where((fileName) => !langFileNames.contains(fileName))
+        .toList();
     if (missing.isNotEmpty) {
       missingFiles[lang.code] = missing;
     }
@@ -32,14 +37,13 @@ bool checkFiles(List<LangaugeModel> languages) {
 
 // bool checkFiles(List<LangaugeModel> languages) {
 //   if (languages.isEmpty) return false;
-  
+
 //   // Collect all unique filenames across all languages
 //   final Set<String> allFileNames = {
 //     for (var lang in languages) ...lang.jsonFiles.map((f) => f.uri.pathSegments.last),
 //   };
 
 //   final Map<String, List<String>> missingFiles = {};
-
 
 //   for (var lang in languages) {
 //     final Set<String> langFileNames = lang.jsonFiles.map((f) => f.uri.pathSegments.last).toSet();

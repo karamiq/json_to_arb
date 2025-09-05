@@ -7,7 +7,6 @@ import 'package:json_to_arb/models/langauge_model.dart';
 import 'package:yaml/yaml.dart';
 part 'utils/pubspec.yamle_handler.dart';
 part 'utils/get_json_files.dart';
-//part 'utils/output_handler.dart';
 part 'utils/get_languages.dart';
 part 'utils/configuration.dart';
 part 'utils/convert_jsons_to_one_arb.dart';
@@ -28,6 +27,7 @@ void main() {
   // convert JSON files to single ARB file per language
   convertJsonsToOneArb(languages, arbToJsonModel);
 }
+
 // arb_directories:
 //   source: lib/l10n
 //   output: lib/l10n/app_arb

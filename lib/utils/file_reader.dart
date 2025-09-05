@@ -16,8 +16,9 @@ Map<String, dynamic> readAllJsonFilesForLanguage(LangaugeModel language) {
   return combinedContent;
 }
 
-/// Reads and processes JSON file content with error handling
-/// Returns the processed content as a Map<String, dynamic>
+/// Reads and processes JSON file content with error handling.
+///
+/// Returns the processed content as a map with string keys and dynamic values.
 Map<String, dynamic> readAndProcessJsonFile(File jsonFile) {
   try {
     // Read file content

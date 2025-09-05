@@ -8,7 +8,9 @@ List<LangaugeModel> getLanguages(String source, List<String> locales) {
     final jsonFiles = getJsonFiles(source, locale);
     final language = LangaugeModel(
       // extracting the file contents for each JSON file
-      filesContents: {for (var file in jsonFiles) file: readAndProcessJsonFile(file)},
+      filesContents: {
+        for (var file in jsonFiles) file: readAndProcessJsonFile(file),
+      },
       code: locale,
       jsonFiles: jsonFiles,
     );
