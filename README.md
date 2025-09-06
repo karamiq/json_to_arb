@@ -23,7 +23,7 @@
 Add to your `pubspec.yaml`:
 ```yaml
 dev_dependencies:
-   json_to_arb: ^0.1.1
+   json_to_arb: ^0.1.13
 ```
 Then run:
 ```
@@ -32,6 +32,20 @@ flutter pub get
 
 
 ## Usage
+### Global CLI Installation
+You can install `json_to_arb` globally to use it as a command-line tool anywhere:
+
+```sh
+dart pub global activate json_to_arb
+```
+
+After activation, run:
+
+```sh
+json_to_arb
+```
+
+This will execute the conversion process as defined in your configuration.
 1. **Add your JSON files**
    Organize by language and feature/module:
    ```

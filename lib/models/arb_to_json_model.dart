@@ -16,7 +16,11 @@ class JsonToArbModel {
   /// List of locale codes to process.
   final List<String> locales;
 
-  JsonToArbModel({required this.source, required this.output, required this.locales});
+  JsonToArbModel({
+    required this.source,
+    required this.output,
+    required this.locales,
+  });
 
   // Factory constructor to create an instance from a YamlMap
   /// Creates a [JsonToArbModel] with the given [source], [output], and [locales].

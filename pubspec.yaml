@@ -1,6 +1,6 @@
 name: json_to_arb
 description: A Dart package to convert JSON localization files to ARB format.
-version: 0.1.12
+version: 0.1.13
 repository: https://github.com/karamiq/json_to_arb
 homepage: https://github.com/karamiq/json_to_arb
 
@@ -26,6 +26,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
+executables:
+  json_to_arb:
 
   # To add assets to your package, add an assets section, like this:
   # assets:

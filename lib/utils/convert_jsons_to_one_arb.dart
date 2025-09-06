@@ -3,7 +3,10 @@ part of '../json_to_arb.dart';
 /// Converts a list of language JSON files to a single ARB format.
 /// Handles empty and malformed JSON files gracefully.
 
-void convertJsonsToOneArb(List<LangaugeModel> languages, JsonToArbModel jsonToArbModel) {
+void convertJsonsToOneArb(
+  List<LangaugeModel> languages,
+  JsonToArbModel jsonToArbModel,
+) {
   try {
     for (var language in languages) {
       // Use the new file reader function to get all content for this language
@@ -34,6 +37,8 @@ void handleJsonFileErrors(String fileContent, String filePath) {
     }
   } catch (e) {
     if (e is SkipFileException) rethrow;
-    throw FormatException('[ERROR] Failed to parse JSON in file: $filePath\n$e');
+    throw FormatException(
+      '[ERROR] Failed to parse JSON in file: $filePath\n$e',
+    );
   }
 }

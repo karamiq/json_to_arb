@@ -15,6 +15,8 @@ List<File> getJsonFiles(String source, String locale) {
     return files;
   } catch (e, stack) {
     Logger.error('Failed to list JSON files in $source/$locale: $e');
-    throw JsonToArbException('Failed to list JSON files in $source/$locale: $e\n$stack');
+    throw JsonToArbException(
+      'Failed to list JSON files in $source/$locale: $e\n$stack',
+    );
   }
 }
