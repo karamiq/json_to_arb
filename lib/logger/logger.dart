@@ -1,3 +1,5 @@
+part of '../json_to_arb.dart';
+
 class Logger {
   static const String _reset = '\x1B[0m';
   static const String _red = '\x1B[31m';

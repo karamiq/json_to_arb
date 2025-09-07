@@ -1,4 +1,4 @@
-import 'dart:io';
+part of '../json_to_arb.dart';
 
 // Model representing a language and its associated JSON files
 class LangaugeModel {

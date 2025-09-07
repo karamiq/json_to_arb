@@ -1,5 +1,4 @@
-import 'package:json_to_arb/constants/keys.dart';
-import 'package:yaml/yaml.dart';
+part of '../json_to_arb.dart';
 
 // Model representing the configuration for JSON to ARB conversion
 /// Model representing the configuration for JSON to ARB conversion.

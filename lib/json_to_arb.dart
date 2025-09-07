@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:json_to_arb/constants/keys.dart';
-import 'package:json_to_arb/logger/logger.dart';
-import 'package:json_to_arb/models/arb_to_json_model.dart';
-import 'package:json_to_arb/models/langauge_model.dart';
 import 'package:yaml/yaml.dart';
+part 'package:json_to_arb/logger/logger.dart';
+part 'package:json_to_arb/models/arb_to_json_model.dart';
+part 'package:json_to_arb/models/langauge_model.dart';
+
 part 'utils/pubspec.yamle_handler.dart';
 part 'utils/get_json_files.dart';
 part 'utils/get_languages.dart';
@@ -13,6 +13,7 @@ part 'utils/convert_jsons_to_one_arb.dart';
 part 'utils/files_existing_checker.dart';
 part 'utils/file_reader.dart';
 part 'exceptions/exceptions.dart';
+part 'package:json_to_arb/constants/keys.dart';
 
 // - The tool automatically checks for missing and duplicate keys. --- IGNORE ---
 

@@ -1,3 +1,16 @@
+## [0.1.14] - 2025-09-07
+Enhanced CLI functionality and improved documentation.
+- Added proper CLI executable configuration for `dart run` and global installation support
+- Improved README with clear problem-solution narrative and streamlined documentation
+- Enhanced configuration key documentation with detailed explanations
+- Fixed executables configuration in pubspec.yaml for proper CLI usage
+- Updated Keys class with better documentation and const declarations
+
+## [0.1.13] - 2025-09-07
+Fixed executables configuration for proper CLI functionality.
+- Corrected executables section in pubspec.yaml to remove invalid path separators
+- Enabled proper `dart run json_to_arb` and global CLI installation support
+
 ## [0.1.12] - 2025-09-06
 Version bump to 0.1.12 for maintenance and compatibility updates.
 
