@@ -1,0 +1,6 @@
+json_to_arb:
+  source: test_l10n
+  output: test_l10n/app_arb
+  locales:
+    - en
+    - ar
