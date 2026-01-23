@@ -27,35 +27,24 @@ Map<String, dynamic> readAndProcessJsonFile(File jsonFile) {
     // Use the error handler, skip file if needed
     handleJsonFileErrors(fileContent, jsonFile.path);
 
-    // Get filename without extension for flattening
+    // Get filename without extension for flattening (default: preserve as prefix)
     final fileName = jsonFile.path.split('/').last.split('.').first;
-
-    // Parse JSON content
     final Map<String, dynamic> jsonMap = jsonDecode(fileContent);
-
-    // Flatten the JSON with filename prefix
     final flattenedJson = flattenJson(jsonMap, parentKey: fileName);
-
     return flattenedJson;
   } on SkipFileException {
     Logger.warning('Skipping file due to previous error: ${jsonFile.path}');
     rethrow;
   } catch (e) {
-    throw JsonToArbException(
-      'Failed to read and process file ${jsonFile.path}: $e',
-    );
+    throw JsonToArbException('Failed to read and process file ${jsonFile.path}: $e');
   }
 }
 
-Map<String, dynamic> flattenJson(
-  Map<String, dynamic> json, {
-  String parentKey = '',
-}) {
+Map<String, dynamic> flattenJson(Map<String, dynamic> json, {String parentKey = ''}) {
   final Map<String, dynamic> result = {};
 
   json.forEach((key, value) {
-    final keyUpperFirstChar = key[0].toUpperCase() + key.substring(1);
-    final newKey = parentKey.isEmpty ? key : '$parentKey$keyUpperFirstChar';
+    final String newKey = parentKey.isEmpty ? key : '${parentKey}_$key';
     if (value is Map<String, dynamic>) {
       result.addAll(flattenJson(value, parentKey: newKey));
     } else {

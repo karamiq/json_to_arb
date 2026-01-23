@@ -7,11 +7,5 @@ class LangaugeModel {
   // List of JSON files for this language
   final List<File> jsonFiles;
 
-  final Map<File, Map<String, dynamic>> filesContents;
-
-  LangaugeModel({
-    required this.code,
-    required this.jsonFiles,
-    required this.filesContents,
-  });
+  LangaugeModel({required this.code, required this.jsonFiles});
 }

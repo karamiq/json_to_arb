@@ -22,4 +22,16 @@ class Logger {
   static void info(String message) {
     print('$_blue[INFO] $message$_reset');
   }
+
+  static void yellow(String message) {
+    print('$_yellow$message$_reset');
+  }
+
+  static void green(String message) {
+    print('$_green$message$_reset');
+  }
+
+  static void red(String message) {
+    print('$_red$message$_reset');
+  }
 }

@@ -3,10 +3,7 @@ part of '../json_to_arb.dart';
 /// Converts a list of language JSON files to a single ARB format.
 /// Handles empty and malformed JSON files gracefully.
 
-void convertJsonsToOneArb(
-  List<LangaugeModel> languages,
-  JsonToArbModel jsonToArbModel,
-) {
+void convertJsonsToOneArb(List<LangaugeModel> languages) {
   try {
     for (var language in languages) {
       // Use the new file reader function to get all content for this language
