@@ -21,8 +21,4 @@ class Keys {
   /// Whether to enable logging of the conversion process
   /// Default is true
   static const String logging = 'logging';
-
-  /// File naming convention for key prefixes in ARB files
-  /// Options: 'preserve' (default), 'camel'
-  static const String fileNameCase = 'file_name_case';
 }

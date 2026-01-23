@@ -27,8 +27,23 @@ Map<String, dynamic> readAndProcessJsonFile(File jsonFile) {
     // Use the error handler, skip file if needed
     handleJsonFileErrors(fileContent, jsonFile.path);
 
-    // Get filename without extension for flattening (default: preserve as prefix)
-    final fileName = jsonFile.path.split('/').last.split('.').first;
+    // Create filename prefix based on file path
+    final parts = jsonFile.path
+        .split('/')
+        .skipWhile((part) => part == _jsonToArbModel.source)
+        .skip(1)
+        .join('/')
+        .replaceAll('.json', '')
+        .split('/');
+    String fileName = parts.first;
+    for (int i = 1; i < parts.length; i++) {
+      String word = parts[i];
+      String capitalized = word[0].toUpperCase() + word.substring(1);
+
+      fileName += capitalized;
+    }
+
+    // Parse JSON content
     final Map<String, dynamic> jsonMap = jsonDecode(fileContent);
     final flattenedJson = flattenJson(jsonMap, parentKey: fileName);
     return flattenedJson;
@@ -44,7 +59,7 @@ Map<String, dynamic> flattenJson(Map<String, dynamic> json, {String parentKey = 
   final Map<String, dynamic> result = {};
 
   json.forEach((key, value) {
-    final String newKey = parentKey.isEmpty ? key : '${parentKey}_$key';
+    final String newKey = '$parentKey${key[0].toUpperCase()}${key.substring(1)}';
     if (value is Map<String, dynamic>) {
       result.addAll(flattenJson(value, parentKey: newKey));
     } else {
