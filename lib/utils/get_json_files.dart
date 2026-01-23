@@ -7,16 +7,15 @@ List<File> getJsonFiles(String source, String locale) {
     throw Exception('[ERROR] Directory not found: $source/$locale');
   }
   try {
+    // Recursively list all .json files in the directory and subdirectories
     final files = directory
-        .listSync()
+        .listSync(recursive: true)
         .whereType<File>()
         .where((file) => file.path.endsWith('.json'))
         .toList();
     return files;
   } catch (e, stack) {
     Logger.error('Failed to list JSON files in $source/$locale: $e');
-    throw JsonToArbException(
-      'Failed to list JSON files in $source/$locale: $e\n$stack',
-    );
+    throw JsonToArbException('Failed to list JSON files in $source/$locale: $e\n$stack');
   }
 }

@@ -27,8 +27,15 @@ Map<String, dynamic> readAndProcessJsonFile(File jsonFile) {
     // Use the error handler, skip file if needed
     handleJsonFileErrors(fileContent, jsonFile.path);
 
-    // Get filename without extension for flattening
-    final fileName = jsonFile.path.split('/').last.split('.').first;
+    // Create filename prefix based on file path
+    final parts = jsonFile.path.split('/').skip(2).join('/').replaceAll('.json', '').split('/');
+    String fileName = parts.first;
+    for (int i = 1; i < parts.length; i++) {
+      String word = parts[i];
+      String capitalized = word[0].toUpperCase() + word.substring(1);
+
+      fileName += capitalized;
+    }
 
     // Parse JSON content
     final Map<String, dynamic> jsonMap = jsonDecode(fileContent);
@@ -41,16 +48,11 @@ Map<String, dynamic> readAndProcessJsonFile(File jsonFile) {
     Logger.warning('Skipping file due to previous error: ${jsonFile.path}');
     rethrow;
   } catch (e) {
-    throw JsonToArbException(
-      'Failed to read and process file ${jsonFile.path}: $e',
-    );
+    throw JsonToArbException('Failed to read and process file ${jsonFile.path}: $e');
   }
 }
 
-Map<String, dynamic> flattenJson(
-  Map<String, dynamic> json, {
-  String parentKey = '',
-}) {
+Map<String, dynamic> flattenJson(Map<String, dynamic> json, {String parentKey = ''}) {
   final Map<String, dynamic> result = {};
 
   json.forEach((key, value) {

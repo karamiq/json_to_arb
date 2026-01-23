@@ -1,6 +1,8 @@
 {
-  "appWelcome": "مرحبا",
-  "homeTitle": "الصفحة الرئيسية",
-  "profileUsername": "اسم المستخدم",
-  "profileSettingsPrivacy": "إعدادات الخصوصية"
+  "appKey0": "key0",
+  "firstSecondThirdExtraKey3": "key3",
+  "firstSecondThird3Key3": "key3",
+  "firstSecondExtraKey2": "key2",
+  "firstSecond2Key2": "key2",
+  "firstExtraKey1": "key1"
 }
