@@ -10,11 +10,15 @@ void convertJsonsToOneArb(
   try {
     for (var language in languages) {
       // Use the new file reader function to get all content for this language
-      final arbContent = readAllJsonFilesForLanguage(language);
+      final arbContent = readAllJsonFilesForLanguage(language, jsonToArbModel);
 
       // Write the ARB file
       final arbFileName = '${jsonToArbModel.output}/app_${language.code}.arb';
       final arbFile = File(arbFileName);
+
+      // Ensure the directory structure (e.g., 'meow/output/') exists
+      arbFile.parent.createSync(recursive: true);
+
       final encoder = JsonEncoder.withIndent('  ');
       arbFile.writeAsStringSync(encoder.convert(arbContent));
       Logger.success('Generated ARB file: $arbFileName');
