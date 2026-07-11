@@ -21,14 +21,17 @@ final _jsonToArbModel = config();
 // Main function to execute the JSON to ARB conversion process
 void main() {
   // get the list of languages and their corresponding JSON files
-  final languages = getLanguages(_jsonToArbModel.source, _jsonToArbModel.locales);
+  final languages = getLanguages(
+    _jsonToArbModel.source,
+    _jsonToArbModel.locales,
+  );
 
   // convert JSON files to single ARB file per language
   convertJsonsToOneArb(languages);
 
   // check for consistancy between all JSON files
   if (_jsonToArbModel.logging) {
-    consistancyChecker(languages);
+    consistancyChecker(languages, _jsonToArbModel);
   }
 }
 

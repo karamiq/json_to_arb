@@ -124,6 +124,7 @@ Errors and warnings are printed in color for easy debugging.
 - **Invalid JSON Format:** Reports syntax errors or malformed JSON files that cannot be parsed.
 - **File/Folder Issues:** Warns about missing source/output directories or inaccessible files.
 - **General Warnings:** Any other issues that may affect ARB generation or localization integrity.
+- **Skip Deduplication:** A file that is skipped because of an error is reported once, even if the consistency check revisits it later.
 
 All logs are printed in color for easy visibility in the terminal.
 
@@ -152,6 +153,7 @@ If duplicate keys are found across your JSON files, the tool prints a clear log 
 - Support for nested folders
 - Configuration can be in json_to_arb.yaml or pubspec.yaml
 - Improved error messages and duplicate key logging
+- Skipped file warnings are deduplicated across generation and consistency checks
 - Full compatibility with Flutter offical localization
 
 ## Contributing

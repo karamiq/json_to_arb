@@ -7,7 +7,7 @@ void convertJsonsToOneArb(List<LangaugeModel> languages) {
   try {
     for (var language in languages) {
       // Use the new file reader function to get all content for this language
-      final arbContent = readAllJsonFilesForLanguage(language);
+      final arbContent = readAllJsonFilesForLanguage(language, _jsonToArbModel);
 
       // Write the ARB file
       final arbFileName = '${_jsonToArbModel.output}/app_${language.code}.arb';
@@ -34,6 +34,8 @@ void handleJsonFileErrors(String fileContent, String filePath) {
     }
   } catch (e) {
     if (e is SkipFileException) rethrow;
-    throw FormatException('[ERROR] Failed to parse JSON in file: $filePath\n$e');
+    throw FormatException(
+      '[ERROR] Failed to parse JSON in file: $filePath\n$e',
+    );
   }
 }

@@ -1,26 +1,30 @@
 part of '../json_to_arb.dart';
 
-void consistancyChecker(List<LangaugeModel> languages) {
+void consistancyChecker(List<LangaugeModel> languages, JsonToArbModel model) {
   if (languages.isEmpty) {
     Logger.info('No languages found for consistency check.');
     return;
   }
 
-  _checkMissingKeys(languages);
-  _checkDuplicateValues(languages);
+  _checkMissingKeys(languages, model);
+  _checkDuplicateValues(languages, model);
   Logger.success('Consistency check completed.');
 }
 
 /// Check for missing keys across all languages
 /// Compares each language against the first one as a reference
 /// Logs any missing or extra keys found
-void _checkMissingKeys(List<LangaugeModel> languages) {
+void _checkMissingKeys(List<LangaugeModel> languages, JsonToArbModel model) {
   final referenceKeys = readAllJsonFilesForLanguage(
     languages.first,
+    model,
   ).keys.toSet();
 
   for (var language in languages.skip(1)) {
-    final currentKeys = readAllJsonFilesForLanguage(language).keys.toSet();
+    final currentKeys = readAllJsonFilesForLanguage(
+      language,
+      model,
+    ).keys.toSet();
 
     final missingKeys = referenceKeys.difference(currentKeys);
     final extraKeys = currentKeys.difference(referenceKeys);
@@ -38,7 +42,10 @@ void _checkMissingKeys(List<LangaugeModel> languages) {
   }
 }
 
-void _checkDuplicateValues(List<LangaugeModel> languages) {
+void _checkDuplicateValues(
+  List<LangaugeModel> languages,
+  JsonToArbModel model,
+) {
   bool foundDuplicates = false;
 
   for (var language in languages) {
@@ -47,7 +54,7 @@ void _checkDuplicateValues(List<LangaugeModel> languages) {
     for (var jsonFile in language.jsonFiles) {
       try {
         final fileName = jsonFile.path.split('/').last;
-        final content = readAndProcessJsonFile(jsonFile);
+        final content = readAndProcessJsonFile(jsonFile, model);
 
         content.forEach((key, value) {
           if (value is String && value.trim().isNotEmpty) {
