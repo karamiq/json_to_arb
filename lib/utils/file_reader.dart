@@ -9,9 +9,15 @@ Map<String, dynamic> readAllJsonFilesForLanguage(
 
   for (var jsonFile in language.jsonFiles) {
     try {
-      final fileContent = readAndProcessJsonFile(jsonFile, model);
+      final fileContent = readAndProcessJsonFile(
+        jsonFile,
+        model,
+        language.code,
+      );
       combinedContent.addAll(fileContent);
     } on SkipFileException {
+      continue;
+    } on JsonToArbException {
       continue;
     }
   }
@@ -25,6 +31,7 @@ Map<String, dynamic> readAllJsonFilesForLanguage(
 Map<String, dynamic> readAndProcessJsonFile(
   File jsonFile,
   JsonToArbModel model,
+  String locale,
 ) {
   try {
     // Read file content
@@ -55,7 +62,7 @@ Map<String, dynamic> readAndProcessJsonFile(
 
     if (parts.isEmpty) {
       throw JsonToArbException(
-        'Could not derive key prefix from path: ${jsonFile.path}',
+        'Could not derive key prefix for [$locale] file: ${displayFileName(jsonFile.path)}',
       );
     }
 
@@ -75,11 +82,13 @@ Map<String, dynamic> readAndProcessJsonFile(
 
     return flattenedJson;
   } on SkipFileException {
-    Logger.warning('Skipping file due to previous error: ${jsonFile.path}');
+    Logger.warning(
+      'Skipping [$locale] file due to previous error: ${displayFileName(jsonFile.path)}',
+    );
     rethrow;
   } catch (e) {
     throw JsonToArbException(
-      'Failed to read and process file ${jsonFile.path}: $e',
+      'Failed to read and process [$locale] file ${displayFileName(jsonFile.path)}: $e',
     );
   }
 }
@@ -101,4 +110,12 @@ Map<String, dynamic> flattenJson(
   });
 
   return result;
+}
+
+String displayFileName(String path) {
+  return path
+      .replaceAll('\\', '/')
+      .split('/')
+      .where((part) => part.isNotEmpty)
+      .last;
 }

@@ -21,7 +21,7 @@ void convertJsonsToOneArb(
 
       final encoder = JsonEncoder.withIndent('  ');
       arbFile.writeAsStringSync(encoder.convert(arbContent));
-      Logger.success('Generated ARB file: $arbFileName');
+      Logger.success('Generated ARB file: ${displayFileName(arbFile.path)}');
     }
     Logger.success('All ARB files generated successfully.');
   } catch (e, stack) {
@@ -32,17 +32,21 @@ void convertJsonsToOneArb(
 /// Handles JSON file content errors: empty, malformed, or wrong root type.
 void handleJsonFileErrors(String fileContent, String filePath) {
   if (fileContent.trim().isEmpty) {
-    throw SkipFileException('[ERROR] JSON file is empty, skipping: $filePath');
+    throw SkipFileException(
+      '[ERROR] JSON file is empty, skipping: ${displayFileName(filePath)}',
+    );
   }
   try {
     final dynamic decoded = jsonDecode(fileContent);
     if (decoded is! Map<String, dynamic>) {
-      throw FormatException('[ERROR] JSON root is not a Map: $filePath');
+      throw FormatException(
+        '[ERROR] JSON root is not a Map: ${displayFileName(filePath)}',
+      );
     }
   } catch (e) {
     if (e is SkipFileException) rethrow;
     throw FormatException(
-      '[ERROR] Failed to parse JSON in file: $filePath\n$e',
+      '[ERROR] Failed to parse JSON in file: ${displayFileName(filePath)}\n$e',
     );
   }
 }

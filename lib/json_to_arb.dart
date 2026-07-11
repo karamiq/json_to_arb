@@ -23,11 +23,7 @@ void main() {
   final arbToJsonModel = config();
 
   // get the list of languages and their corresponding JSON files
-  final languages = getLanguages(
-    arbToJsonModel.source,
-    arbToJsonModel.locales,
-    arbToJsonModel,
-  );
+  final languages = getLanguages(arbToJsonModel.source, arbToJsonModel.locales);
 
   // convert JSON files to single ARB file per language
   convertJsonsToOneArb(languages, arbToJsonModel);
