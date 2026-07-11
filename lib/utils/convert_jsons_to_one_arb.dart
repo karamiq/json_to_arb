@@ -7,14 +7,18 @@ void convertJsonsToOneArb(List<LangaugeModel> languages) {
   try {
     for (var language in languages) {
       // Use the new file reader function to get all content for this language
-      final arbContent = readAllJsonFilesForLanguage(language);
+      final arbContent = readAllJsonFilesForLanguage(language, jsonToArbModel);
 
       // Write the ARB file
       final arbFileName = '${_jsonToArbModel.output}/app_${language.code}.arb';
       final arbFile = File(arbFileName);
+
+      // Ensure the directory structure (e.g., 'meow/output/') exists
+      arbFile.parent.createSync(recursive: true);
+
       final encoder = JsonEncoder.withIndent('  ');
       arbFile.writeAsStringSync(encoder.convert(arbContent));
-      Logger.success('Generated ARB file: $arbFileName');
+      Logger.success('Generated ARB file: ${displayFileName(arbFile.path)}');
     }
     Logger.success('All ARB files generated successfully.');
   } catch (e, stack) {
@@ -25,15 +29,25 @@ void convertJsonsToOneArb(List<LangaugeModel> languages) {
 /// Handles JSON file content errors: empty, malformed, or wrong root type.
 void handleJsonFileErrors(String fileContent, String filePath) {
   if (fileContent.trim().isEmpty) {
-    throw SkipFileException('[ERROR] JSON file is empty, skipping: $filePath');
+    throw SkipFileException(
+      '[ERROR] JSON file is empty, skipping: ${displayFileName(filePath)}',
+    );
   }
   try {
     final dynamic decoded = jsonDecode(fileContent);
     if (decoded is! Map<String, dynamic>) {
-      throw FormatException('[ERROR] JSON root is not a Map: $filePath');
+      throw FormatException(
+        '[ERROR] JSON root is not a Map: ${displayFileName(filePath)}',
+      );
     }
   } catch (e) {
     if (e is SkipFileException) rethrow;
+<<<<<<< HEAD
     throw FormatException('[ERROR] Failed to parse JSON in file: $filePath\n$e');
+=======
+    throw FormatException(
+      '[ERROR] Failed to parse JSON in file: ${displayFileName(filePath)}\n$e',
+    );
+>>>>>>> nested-folders
   }
 }
