@@ -6,15 +6,7 @@ List<LangaugeModel> getLanguages(String source, List<String> locales) {
   for (var locale in locales) {
     // Get all JSON files for the current locale
     final jsonFiles = getJsonFiles(source, locale);
-<<<<<<< HEAD
     final language = LangaugeModel(code: locale, jsonFiles: jsonFiles);
-=======
-    final language = LangaugeModel(
-      filesContents: const <File, Map<String, dynamic>>{},
-      code: locale,
-      jsonFiles: jsonFiles,
-    );
->>>>>>> nested-folders
     languages.add(language);
   }
   return languages;
