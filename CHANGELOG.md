@@ -1,6 +1,9 @@
+## [0.2.2] - 2026-07-11
+- Added the "logging" option to trun on/off logging.
+
 ## [0.2.1] - 2026-07-11
 - Added `example/example.dart` and `example/README.md` to satisfy pub.dev's example check.
-- ...(any other real changes in this version — e.g. did the example addition trigger any bump-worthy behavior change, or was 0.2.1 solely the example/doc fix?)
+- ...(any other real changes in this version — e.g. did the example addition trigger any bump-worthy behavior change, or was 0.2.2 solely the example/doc fix?)
 
 ## [0.2.0] - 2026-07-11
 Publishing metadata refresh and logging cleanup.

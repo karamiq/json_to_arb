@@ -31,7 +31,7 @@ This tool provides indirect support for Flutter's built-in internationalization,
 Add to your `pubspec.yaml`:
 ```yaml
 dev_dependencies:
-   json_to_arb: ^0.2.1
+   json_to_arb: ^0.2.2
 ```
 Then run:
 ```
@@ -56,13 +56,14 @@ dependencies:
 
 dev_dependencies:
    ...
-   json_to_arb: 0.2.1
+   json_to_arb: 0.2.2
    ...
 
 flutter:
 ...
 
 json_to_arb:
+   logging: true  // Automatically true
    source: lib/l10n
    output: lib/l10n/app_arb
    locales:

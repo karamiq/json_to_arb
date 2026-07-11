@@ -1,6 +1,6 @@
 name: json_to_arb
 description: Convert modular JSON localization files into Flutter ARB files with nested folder support.
-version: 0.2.1
+version: 0.2.2
 repository: https://github.com/karamiq/json_to_arb
 homepage: https://github.com/karamiq/json_to_arb
 issue_tracker: https://github.com/karamiq/json_to_arb/issues
