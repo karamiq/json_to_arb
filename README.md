@@ -147,6 +147,17 @@ If duplicate keys are found across your JSON files, the tool prints a clear log 
 ==================================================
 ```
 
+Then run:
+```
+dart run json_to_arb
+```
+
+Or for automatic run use:
+```
+dart run json_to_arb --watch
+```
+
+
 ---
 
 **Changelog highlights:**

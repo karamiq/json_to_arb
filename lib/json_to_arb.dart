@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:yaml/yaml.dart';
+import 'package:watcher/watcher.dart';
 part 'package:json_to_arb/logger/logger.dart';
 part 'package:json_to_arb/models/arb_to_json_model.dart';
 part 'package:json_to_arb/models/langauge_model.dart';
@@ -19,26 +21,56 @@ part 'utils/consistancy_checker.dart';
 final _jsonToArbModel = config();
 
 // Main function to execute the JSON to ARB conversion process
-void main() {
-  // get the list of languages and their corresponding JSON files
+void main(List<String> arguments) {
+  final watchMode = arguments.contains('--watch') || arguments.contains('-w');
+
+  if (watchMode) {
+    _runWatch();
+  } else {
+    _runOnce();
+  }
+}
+
+/// Runs the conversion a single time (original behavior).
+void _runOnce() {
   final languages = getLanguages(
     _jsonToArbModel.source,
     _jsonToArbModel.locales,
   );
 
-  // convert JSON files to single ARB file per language
   convertJsonsToOneArb(languages);
 
-  // check for consistancy between all JSON files
   if (_jsonToArbModel.logging) {
     consistancyChecker(languages, _jsonToArbModel);
   }
 }
 
-// arb_directories:
-//   source: lib/l10n
-//   output: lib/l10n/app_arb
-//   logging: true # optional, default is true
-//   locales:
-//     - en
-//     - ar
+/// Watches the source directory for JSON changes and re-runs
+/// the conversion automatically, debounced to avoid duplicate
+/// triggers from editors that emit multiple write events per save.
+void _runWatch() {
+  final watcher = DirectoryWatcher(_jsonToArbModel.source);
+  Timer? debounce;
+
+  stdout.writeln(
+    'json_to_arb: watching "${_jsonToArbModel.source}" for changes...',
+  );
+  _runOnce(); // run once immediately on startup
+
+  watcher.events.listen((event) {
+    if (!event.path.endsWith('.json')) return;
+
+    debounce?.cancel();
+    debounce = Timer(const Duration(milliseconds: 200), () {
+      stdout.writeln(
+        'json_to_arb: change detected (${event.path}), regenerating...',
+      );
+      try {
+        _runOnce();
+        stdout.writeln('json_to_arb: done.');
+      } catch (e) {
+        stdout.writeln('json_to_arb: error during regeneration -> $e');
+      }
+    });
+  });
+}
