@@ -1,3 +1,9 @@
+## [0.2.0] - 2026-07-11
+Publishing metadata refresh and logging cleanup.
+- Added pub.dev discovery metadata including issue tracker and topics
+- Deduplicated skip warnings so a bad JSON file is reported once across generation and consistency checks
+- Updated README install examples to match the published version
+
 ## [0.1.14] - 2025-09-07
 Enhanced CLI functionality and improved documentation.
 - Added proper CLI executable configuration for `dart run` and global installation support
